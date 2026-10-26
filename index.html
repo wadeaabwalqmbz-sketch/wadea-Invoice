@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> الفواتير</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="m-0 bg-slate-100 px-4 py-6 font-sans text-slate-800">
+
+    <div class="mx-auto max-w-[800px] rounded-2xl bg-white p-4 shadow-[0_5px_25px_#0000000d] sm:p-6">
+
+        <h1 class="text-center text-[27px] font-bold text-blue-600">🧾 Wadea Invoice</h1>
+        <p class="text-center text-slate-500">
+            أضف منتجاتك وأنشئ فاتورتك بسهولة
+        </p>
+
+        <div class="mb-5 flex justify-start">
+            <button id="closeGate"
+                    class="rounded-lg bg-red-700 px-4 py-3 text-[13px] font-bold text-white sm:text-[15px]">
+                سكر المعبر
+            </button>
+        </div>
+
+        <h2 class="text-center text-2xl font-bold">المنتجات</h2>
+
+        <div id="products">
+
+            <div class="product-row mb-3 grid grid-cols-[minmax(0,1fr)_95px_38px] gap-1.5 sm:grid-cols-[1fr_130px_45px] sm:gap-2.5">
+                <input type="text"
+                       class="product-name w-full min-w-0 rounded-lg border border-slate-300 px-[7px] py-2.5 text-[13px] outline-none focus:border-blue-600 sm:p-3 sm:text-[15px]"
+                       placeholder="اسم المنتج">
+
+                <input type="number"
+                       class="product-price w-full min-w-0 rounded-lg border border-slate-300 px-[7px] py-2.5 text-[13px] outline-none focus:border-blue-600 sm:p-3 sm:text-[15px]"
+                       placeholder="السعر" min="0" step="any">
+
+                <button class="add-btn rounded-lg bg-green-600 p-[5px] text-[21px] font-bold text-white sm:text-[23px]"
+                        onclick="addProduct()" title="إضافة منتج">+</button>
+            </div>
+
+        </div>
+
+        <button class="mt-4 w-full rounded-lg bg-blue-600 px-4 py-3 text-[13px] font-bold text-white sm:text-[15px]"
+                onclick="createInvoice()">
+            إنشاء فاتورة
+        </button>
+
+        <section class="mt-8 hidden border-t-2 border-dashed border-slate-300 pt-5" id="invoice">
+
+            <div class="mb-5 text-center">
+                <h2 class="text-2xl font-bold">فاتورتك</h2>
+                <p>تفاصيل المنتجات والمبالغ</p>
+            </div>
+
+            <div id="invoiceItems"></div>
+
+            <div class="mt-5 rounded-[10px] bg-slate-50 p-[18px]">
+
+                <div class="my-3 flex justify-between gap-3">
+                    <span>المجموع الأصلي</span>
+                    <strong id="subtotal">0.00</strong>
+                </div>
+
+                <div class="mt-4">
+                    <button class="rounded-lg bg-slate-200 px-4 py-3 text-[13px] font-bold text-slate-800 sm:text-[15px]"
+                            onclick="toggleCoupon()">
+                        Have Coupon?
+                    </button>
+
+                    <div class="mt-2.5 hidden" id="couponArea">
+                        <input type="text" id="couponCode"
+                               class="w-full min-w-0 rounded-lg border border-slate-300 px-[7px] py-2.5 text-[13px] outline-none focus:border-blue-600 sm:p-3 sm:text-[15px]"
+                               placeholder="أدخل رمز الكوبون">
+
+                        <button class="mt-4 w-full rounded-lg bg-blue-600 px-4 py-3 text-[13px] font-bold text-white sm:text-[15px]"
+                                onclick="applyCoupon()">
+                            تطبيق الكوبون
+                        </button>
+
+                        <p class="mt-2.5 text-sm" id="couponMessage"></p>
+                    </div>
+                </div>
+
+                <div class="my-3 flex justify-between gap-3">
+                    <span>الخصم</span>
+                    <strong id="discount">0.00</strong>
+                </div>
+
+                <div class="my-3 flex justify-between gap-3">
+                    <span>زيادة سكر المعبر</span>
+                    <strong id="gateIncrease">0.00</strong>
+                </div>
+
+                <div class="my-3 flex justify-between gap-3 border-t border-slate-300 pt-4 text-[21px] font-bold text-blue-600">
+                    <span>المجموع النهائي</span>
+                    <strong id="finalTotal">0.00</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
